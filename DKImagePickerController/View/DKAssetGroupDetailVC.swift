@@ -335,11 +335,16 @@ internal class DKAssetGroupDetailVC: UICollectionViewController, DKGroupDataMana
 		
 		let itemSize = self.collectionView!.collectionViewLayout.layoutAttributesForItemAtIndexPath(indexPath)!.size
         
-		asset.fetchImageWithSize(itemSize.toPixel(), options: self.groupImageRequestOptions) { image, info in
-			if cell.tag == tag {
-				cell.thumbnailImageView.image = image
-			}
-		}
+        asset.fetchOriginalImage(false) { (image, info) in
+            if cell.tag == tag {
+                cell.thumbnailImageView.image = image
+            }
+        }
+//		asset.fetchImageWithSize(itemSize.toPixel(), options: self.groupImageRequestOptions) { image, info in
+//            if cell.tag == tag {
+//                cell.thumbnailImageView.image = image
+//            }
+//		}
 		
 		if let index = DKImagePickerController.sharedInstance().selectedAssets.indexOf(asset) {
 			cell.selected = true
